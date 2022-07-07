@@ -1,0 +1,642 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Verdana', sans-serif;
+}
+
+body,
+html {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    color: rgba(255, 255, 255, 1);
+}
+
+.loading_screen_container {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+}
+
+.loading_screen_relative {
+    position: relative;
+    display: grid;
+    place-items: center;
+    width: 100%;
+    height: 100%;
+    background-color: #252525;
+}
+
+.loading_screen_circle {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    border-top: 5px solid rgba(255, 120, 120);
+    animation: rotate_circle 1s ease infinite;
+}
+
+@keyframes rotate_circle {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+.generator_container {
+    position: relative;
+    display: grid;
+    place-items: center;
+    min-width: 100%;
+    background: #303030;
+    min-height: 100vh;
+}
+
+.close_button_holder {
+    position: absolute;
+    display: grid;
+    place-items: center;
+    top: 0;
+    right: 0;
+    width: 5rem;
+    height: 5rem;
+    margin: 0;
+}
+
+.close_button,
+.close_signin_button {
+    position: relative;
+    display: grid;
+    place-items: center;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+}
+
+.close_button ion-icon,
+.close_signin_button ion-icon {
+    cursor: pointer;
+    width: 50%;
+    height: 50%;
+    transition: 0.3s;
+}
+
+.close_signin_button ion-icon {
+    color: #252525;
+}
+
+.close_button ion-icon:hover,
+.close_signin_button ion-icon:hover {
+    width: 60%;
+    height: 60%;
+}
+
+.forms {
+    text-align: center;
+    display: none;
+    transform: translateY(100vh);
+    animation: godown .5s ease forwards;
+}
+
+@keyframes goup {
+    0% {
+        transform: translateY(100vh);
+    }
+    100% {
+        transform: translateY(0vh);
+    }
+}
+
+@keyframes godown {
+    0% {
+        transform: translateY(0vh);
+    }
+    100% {
+        transform: translateY(100vh);
+    }
+}
+
+.forms.active {
+    text-align: center;
+    display: block;
+    animation: goup .5s ease forwards;
+}
+
+.form_items {
+    position: relative;
+    display: grid;
+    margin-top: 4em;
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+.account_handler_container {
+    position: relative;
+    display: grid;
+    place-items: center;
+    max-width: 100%;
+    min-height: 45%;
+    background-color: rgba(240, 240, 240, 0.8);
+    padding: 5em 0;
+    border-radius: 20px;
+    transform: translateY(0vh);
+    text-align: center;
+    overflow: hidden;
+}
+
+.account_handler_container.active {
+    display: none;
+}
+
+.login_page {
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(255, 255, 255, 0.1);
+    top: 0;
+    left: 110%;
+    animation: moveright 0.3s linear forwards;
+    backdrop-filter: blur(10px);
+    border-radius: 20px;
+    border-top: 1px solid rgba(255, 255, 255, 0.7);
+    border-left: 1px solid rgba(255, 255, 255, 0.6);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.4);
+    border-right: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.login_container {
+    position: relative;
+    display: grid;
+    place-items: center;
+    width: 100%;
+    height: 100%;
+}
+
+.login_header {
+    margin-bottom: .5em;
+    font-size: 3em;
+    -webkit-text-stroke: 3px rgba(35, 35, 35, 0.7);
+    color: rgba(255, 255, 255, 0.5);
+}
+
+.username_container {
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
+    box-shadow: 5px 0px 15px rgba(0, 0, 0, 0.4);
+}
+
+.password_container {
+    border-bottom-left-radius: 20px;
+    border-bottom-right-radius: 20px;
+    box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.4);
+}
+
+.username_container,
+.password_container {
+    position: relative;
+    display: flex;
+    align-items: center;
+    padding: .5em 1.5em;
+    font-size: 20px;
+    background-color: rgba(255, 255, 255, 0.9);
+}
+
+.submit_container {
+    position: absolute;
+    bottom: 0;
+    display: flex;
+    align-items: start;
+    justify-content: center;
+    width: 100%;
+}
+
+.submit_button {
+    position: absolute;
+    bottom: -1.8em;
+}
+
+.username_container input,
+.password_container input {
+    width: 100%;
+    border-radius: 10px;
+    box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.4);
+    font-size: 3em;
+    padding-left: .3em;
+}
+
+.user_icon,
+.password_icon,
+.delete_icon {
+    font-size: 1.5em;
+    color: rgba(35, 35, 35, 0.8);
+    position: absolute;
+    margin-left: .4em;
+}
+
+.delete_icon {
+    opacity: 0;
+    right: 1em;
+    transition: 0.3s;
+}
+
+.delete_icon.active {
+    opacity: 1;
+    right: 1.3em;
+}
+
+.login_page.active {
+    animation: moveleft 0.3s linear forwards;
+}
+
+@keyframes moveleft {
+    0% {
+        left: 110%;
+    }
+    100% {
+        left: 0
+    }
+}
+
+@keyframes moveright {
+    0% {
+        left: 0%;
+    }
+    100% {
+        left: 110%
+    }
+}
+
+.default_data {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly;
+    gap: 1.5em;
+    font-size: 4vw;
+}
+
+.default_data .new_shape {
+    border-top-right-radius: 20px;
+    border-bottom-left-radius: 20px;
+    border-top: 1px solid rgba(37, 37, 37, 0.3);
+    border-left: 1px solid rgba(37, 37, 37, 0.4);
+    border-right: 0px;
+    padding: 1em 2em;
+    transition: 0.5s;
+    white-space: nowrap;
+    background-color: #e0e0e0;
+    box-shadow: 5px 5px 13px rgba(0, 0, 0, 0.4);
+}
+
+.default_data .new_shape:hover {
+    border-top-right-radius: 15px;
+    border-bottom-left-radius: 15px;
+    padding: 1em 0.5em;
+    letter-spacing: 2px;
+}
+
+.default_data a,
+.link {
+    text-align: center;
+    text-decoration: none;
+    color: black;
+    transition: 0.3s;
+    cursor: pointer;
+}
+
+.default_data a:hover,
+.link:hover {
+    color: rgba(120, 120, 255);
+}
+
+.signin {
+    margin-top: 5em;
+    text-decoration: underline;
+    color: rgba(255, 80, 80);
+}
+
+.items {
+    display: grid;
+    place-items: center;
+    text-align: center;
+    grid-gap: 1em;
+    margin: 0.5em 0;
+}
+
+.items span {
+    font-size: 1.2rem;
+    width: 100%;
+}
+
+.items input[type="text"],
+textarea,
+#new_password,
+#new_cpassword {
+    border-radius: 10px;
+    font-size: 1rem;
+    width: 90%;
+    height: 3rem;
+    color: #303030;
+    text-align: center;
+    transition: 0.5s;
+}
+
+.items input[type="text"]:focus,
+textarea:focus,
+#new_password:focus,
+#new_cpassword:focus {
+    outline: none;
+    border: 5px solid rgba(255, 120, 120);
+}
+
+textarea {
+    height: 15rem;
+}
+
+#title1,
+#title2 {
+    font-size: 1.5em;
+}
+
+.credential_container {
+    display: grid;
+}
+
+.submit_container {
+    position: relative;
+    width: 100%;
+}
+
+.login_submit_button,
+.create_submit_button {
+    border-radius: 15px;
+    width: 8rem;
+    height: 3.5rem;
+    font-size: 1.5em;
+    margin-top: 1em;
+    box-shadow: 5px 5px 13px rgba(0, 0, 0, 0.4);
+    cursor: pointer;
+}
+
+.login_title {
+    font-size: 1em;
+    text-align: center;
+    color: #252525;
+}
+
+.biography_title {
+    font-size: 3em;
+    text-align: center;
+    color: #252525;
+    margin-top: 1em;
+    -webkit-text-stroke: 2px white;
+}
+
+#login_username,
+#login_password {
+    font-size: 0.7em;
+    padding: 1em 3em;
+    width: 18em;
+    transition: 0.3s;
+}
+
+#login_username:focus,
+#login_password:focus {
+    outline: none;
+    border: 5px solid black;
+}
+
+.template_title {
+    font-size: 2.6em;
+    margin-bottom: .5em;
+    color: white;
+    -webkit-text-stroke: 3px rgba(35, 35, 35, 0.7);
+}
+
+.show_password {
+    position: relative;
+    display: grid;
+    place-items: center;
+}
+
+.show_password label {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    gap: 1em;
+    align-items: center;
+    cursor: pointer;
+    margin-top: 1em;
+    width: 60%;
+}
+
+.show_password label input[type="checkbox"] {
+    display: none;
+}
+
+.new_checkbox {
+    position: relative;
+    display: grid;
+    place-items: center;
+    width: 2em;
+    height: 2em;
+    background-color: #f0f0f0;
+    border-radius: 7px;
+}
+
+.new_checkbox2 {
+    width: 0.8em;
+    height: 0.8em;
+    border-radius: 2px;
+    background-color: #d0d0d0;
+    transition: 0.3s;
+}
+
+.show_password label input[type="checkbox"].active~.new_checkbox .new_checkbox2 {
+    background-color: rgba(255, 120, 120);
+}
+
+@media only screen and (min-width: 768px) {
+    .account_handler_container {
+        max-width: 60%;
+        min-height: 65%;
+        padding: 2em 0;
+    }
+    .generator_container {
+        max-width: 100%;
+    }
+    .close_button ion-icon,
+    .close_signin_button ion-icon {
+        width: 60%;
+        height: 60%;
+    }
+    .close_button ion-icon:hover,
+    .close_signin_button ion-icon:hover {
+        width: 70%;
+        height: 70%;
+    }
+    #login_username,
+    #login_password {
+        font-size: 1.2em;
+        padding: .5em 2.5em;
+        width: 15em;
+    }
+    .user_icon,
+    .password_icon,
+    .delete_icon {
+        font-size: 2em;
+    }
+    .login_header {
+        font-size: 2.5em;
+    }
+    .login_submit_button,
+    .create_submit_button {
+        width: 10rem;
+        height: 4rem;
+        font-size: 1.5em;
+    }
+    .template_title {
+        font-size: 4em;
+    }
+    .signin {
+        margin-top: 3em;
+    }
+    .default_data {
+        font-size: 2vw;
+    }
+    .forms.active {
+        width: 80%;
+    }
+    .items span {
+        font-size: 2.2em;
+    }
+    .items input[type="text"],
+    textarea,
+    #new_password,
+    #new_cpassword {
+        font-size: 1.8em;
+        width: 80%;
+        height: 5rem;
+    }
+    textarea {
+        height: 15rem;
+    }
+    .username_container,
+    .password_container {
+        padding: 1em 2em;
+    }
+    .delete_icon {
+        opacity: 0;
+        right: 0.8em;
+        transition: 0.3s;
+    }
+    .delete_icon.active {
+        opacity: 1;
+        right: 1.2em;
+    }
+    .default_data .new_shape {
+        border-top-right-radius: 25px;
+        border-bottom-left-radius: 25px;
+    }
+}
+
+@media only screen and (min-width: 1024px) {
+    .account_handler_container {
+        max-width: 40%;
+        min-height: 60%;
+        padding: 2em 0;
+    }
+    #login_username,
+    #login_password {
+        font-size: 1em;
+    }
+    .user_icon,
+    .password_icon,
+    .delete_icon {
+        font-size: 1.5em;
+    }
+    .delete_icon {
+        right: 1.2em;
+    }
+    .delete_icon.active {
+        right: 1.6em;
+    }
+    .login_header {
+        font-size: 2.5em;
+    }
+    .template_title {
+        font-size: 3em;
+    }
+    .default_data {
+        font-size: 1.5vw;
+    }
+    .default_data .new_shape {
+        border-top-right-radius: 25px;
+        border-bottom-left-radius: 25px;
+    }
+    .default_data .new_shape:hover {
+        padding: 1em 1em;
+        letter-spacing: 2px;
+    }
+    .biography_title {
+        font-size: 4em;
+        margin-top: 1.5em;
+    }
+    .close_button_holder {
+        width: 5rem;
+        height: 5rem;
+        margin: 0em 0em;
+    }
+    .close_button ion-icon,
+    .close_signin_button ion-icon {
+        width: 60%;
+        height: 60%;
+    }
+    .close_button ion-icon:hover,
+    .close_signin_button ion-icon:hover {
+        width: 70%;
+        height: 70%;
+    }
+    .form_items {
+        margin-top: 2em;
+    }
+    .items input[type="text"],
+    textarea,
+    #new_password,
+    #new_cpassword {
+        font-size: 1.5em;
+        width: 50%;
+        height: 4rem;
+    }
+    .items {
+        grid-gap: 1em;
+    }
+    textarea {
+        height: 10em;
+    }
+    .login_submit_button,
+    .create_submit_button {
+        width: 10rem;
+        height: 4rem;
+        font-size: 1.5em;
+    }
+    .username_container,
+    .password_container {
+        padding: 1em 2em;
+    }
+}
+
+@media only screen and (min-width: 1440px) {
+    .template_title {
+        font-size: 4em;
+    }
+    .default_data .new_shape {
+        border-top-right-radius: 30px;
+        border-bottom-left-radius: 30px;
+    }
+}
